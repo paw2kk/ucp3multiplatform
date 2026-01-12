@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Surat</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1 class="title">✏️ Edit Suray</h1>
+        
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        
+        <form method="post" class="form">
+            <label for="surat">Judul Surat:</label>
+            <input type="text" 
+                   id="surat" 
+                   name="surat" 
+                   placeholder="Masukkan judul surat" 
+                   required 
+                   autofocus>
+            
+            <label for="pengirim">Pengirim:</label>
+            <input type="text" 
+                   id="pengirim" 
+                   name="pengirim" 
+                   placeholder="Masukkan nama pengirim" 
+                   required>
+            
+            <label for="penerima">Penerima:</label>
+            <input type="text" 
+                   id="penerima" 
+                   name="penerima" 
+                   placeholder="Masukkan nama penerima" 
+                   required>
+
+            <label for="tanggal">Tanggal:</label>
+            <input type="int" 
+                   id="'tanggal'" 
+                   name="tanggal" 
+                   placeholder="Masukkan Tanggal" 
+                   required>
+
+            
+            <div class="form-actions">
+                <button type="submit" class="btn primary">💾 Update</button>
+                <a href="{{ url_for('index') }}"><button type="button" class="btn">↩️ Kembali</button></a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>     
