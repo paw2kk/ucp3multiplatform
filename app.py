@@ -17,6 +17,7 @@ def init_db():
                     surat VARCHAR(100) NOT NULL,
                     pengirim VARCHAR(100) NOT NULL,
                     penerima VARCHAR(100) NOT NULL, 
+                    nomor_surat VARCHAR(100),
                     tanggal INTEGER
                     )''')
     conn.commit()
@@ -35,11 +36,12 @@ def add():
         surat = request.form['surat']
         pengirim = request.form['pengirim']
         penerima = request.form['penerima']
+        nomor_surat = request.form['nomor_surat']
         tanggal = request.form.get('tanggal', None)
         
         conn = connectdb()
-        conn.execute('INSERT INTO surat (surat,pengirim,penerima,tanggal) VALUES (?,?, ?, ?)', 
-                     (surat,pengirim,penerima,tanggal))
+        conn.execute('INSERT INTO surat (surat,pengirim,penerima,nomor_surat,tanggal) VALUES (?,?,?, ?, ?)', 
+                     (surat,pengirim,penerima,nomor_surat,tanggal))
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
@@ -57,10 +59,11 @@ def edit(id):
         surat = request.form['surat']
         pengirim = request.form['pengirim']
         penerima = request.form['penerima']
+        nomor_surat = request.form['nomor_surat']
         tanggal = request.form.get('tanggal', None)
         
-        conn.execute('UPDATE  surat set surat = ?, pengirim = ?, penerima = ?, tanggal = ? where id = ?',
-                     (surat,pengirim,penerima,tanggal,id))
+        conn.execute('UPDATE  surat set surat = ?, pengirim = ?, penerima = ?,nomor_surat = ?, tanggal = ? where id = ?',
+                     (surat,pengirim,penerima,nomor_surat,tanggal,id))
         conn.commit()
         conn.close()
         return redirect(url_for('index'))
